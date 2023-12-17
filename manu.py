@@ -76,7 +76,7 @@ import requests
 
 @bot.message_handler(commands=['towar'])
 def send_ware(message):
-    # Отправить сообщение с описанием товара и инлайн-клавиатурой с кнопками
+  
     bot.send_message(message.chat.id, "Название товара: шкаф \nОписание: Шкаф - это многофункциональная мебельная единица, предназначенная для хранения и организации различных предметов. Он обычно имеет несколько отделений, полок и ящиков, которые обеспечивают удобство и функциональность. Шкафы могут быть разных размеров и форм, от небольших прикроватных шкафчиков до больших гардеробных систем. Они могут быть изготовлены из разных материалов, таких как дерево, металл или пластик, и иметь различные стили и дизайны, чтобы соответствовать интерьеру помещения. Шкафы являются неотъемлемой частью меблировки дома или офиса, предоставляя удобное и эстетически приятное решение для хранения и организации вещей.", reply_markup=get_inline_zxcv())
 
 def get_inline_zxcv():
@@ -90,14 +90,14 @@ def get_inline_zxcv():
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
     if call.data == 'buy':
-        # Удалить все кнопки и добавить новые кнопки "Перейти к оплате" и "Отмена"
+       
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=get_payment_keyboard())
     elif call.data == 'info':
-        # Показать описание товара и добавить кнопку "Отмена"
+      
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text="Название товара: шкаф\nОписание: купите этот шкаф деньги пойдут мне в карман",
                               reply_markup=get_cancel_button())
-        # Отправить фотографию товара
+     
         send_ware_photo(call.message.chat.id)
     elif call.data == 'cancel':
         # Обновить предыдущее сообщение с описанием товара и инлайн-клавиатурой
